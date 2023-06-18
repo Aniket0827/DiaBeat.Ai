@@ -1,0 +1,25 @@
+.profile-container {
+    padding: 20px;
+    color: #333;
+}
+
+.title {
+    text-align: center;
+    font-size: 2em;
+    color: #2f4f4f;
+}
+
+.section {
+    margin-bottom: 40px;
+}
+
+.section h2 {
+    color: #2f4f4f;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.section p {
+    color: #696969;
+    margin-bottom: 20px;
+}
