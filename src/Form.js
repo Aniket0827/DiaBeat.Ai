@@ -17,33 +17,40 @@ function Form() {
     const handleChange = event => {
         setFormData({
             ...formData,
-            [event.target.name]: event.target.value,
+            [event.target.name]: event.target.value ? parseFloat(event.target.value) : '',
         });
     };
 
     const handleSubmit = event => {
         event.preventDefault();
         for (let key in formData) {
-            if (formData[key] === '') {
+            if (formData[key] === '' || formData[key] === null) {
                 alert(`Please enter your ${key}`);
                 return;
             }
         }
+
         axios.post('http://localhost:5000/predict', formData)
             .then(response => {
-                console.log(response);
-                alert('Form submitted successfully!');
-                alert(`The prediction is: ${response.data.result}`);
-                setFormData({
-                    Pregnancies: '',
-                    Glucose: '',
-                    BloodPressure: '',
-                    SkinThickness: '',
-                    Insulin: '',
-                    BMI: '',
-                    DiabetesPedigreeFunction: '',
-                    Age: '',
-                });
+                formData['Diabetes'] = response.data.result;
+                alert(`Prediction is ${response.data.result}`);  // Add this line to show an alert with prediction.
+                axios.post('http://localhost:5000/register', formData)
+                    .then(response => {
+                        alert('Form submitted successfully!');
+                        setFormData({
+                            Pregnancies: '',
+                            Glucose: '',
+                            BloodPressure: '',
+                            SkinThickness: '',
+                            Insulin: '',
+                            BMI: '',
+                            DiabetesPedigreeFunction: '',
+                            Age: '',
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Error saving form data!', error);
+                    });
             })
             .catch(error => {
                 console.error('Error submitting form!', error);
@@ -61,7 +68,7 @@ function Form() {
                             type='number'
                             name={key}
                             placeholder={key}
-                            value={formData[key]}
+                            value={formData[key] !== '' ? formData[key] : ''}
                             onChange={handleChange}
                         />
                     ))}
@@ -73,4 +80,3 @@ function Form() {
 }
 
 export default Form;
-//nxhjasnxhjsnjhsanhjhshjsa
