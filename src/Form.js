@@ -33,7 +33,7 @@ function Form() {
             .then(response => {
                 console.log(response);
                 alert('Form submitted successfully!');
-                alert(`The prediction is: ${response.data.prediction}`);
+                alert(`The prediction is: ${response.data.result}`);
                 setFormData({
                     Pregnancies: '',
                     Glucose: '',

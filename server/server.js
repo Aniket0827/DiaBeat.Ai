@@ -1,29 +1,40 @@
 const express = require('express');
 const cors = require('cors');
-const model = require('./model');  // Include your model.js module
-
+const { spawn } = require('child_process');
 const app = express();
 
-// Apply middleware
+// Middleware for CORS and JSON parsing
 app.use(cors());
 app.use(express.json());
 
-// Define a POST route for health prediction
-app.post('/predict', async (req, res) => {
-    try {
-        // Get user data from request body
-        const userData = req.body;
+app.post('/predict', (req, res) => {
+    const python = spawn('python', ['./MLModels/predict.py', 
+                                    req.body.Pregnancies, 
+                                    req.body.Glucose, 
+                                    req.body.BloodPressure,
+                                    req.body.SkinThickness,
+                                    req.body.Insulin,
+                                    req.body.BMI,
+                                    req.body.DiabetesPedigreeFunction,
+                                    req.body.Age]);
 
-        // Pass user data to healthModel.py through model.js
-        const prediction = await model.predictHealthRisk(userData);
+    let result = '';
 
-        // Send prediction back as a response
-        res.json({ prediction: prediction });
+    python.stdout.on('data', (data) => {
+        result += data.toString();
+    });
 
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Error predicting health risk.');
-    }
+    python.stderr.on('data', (data) => {
+        console.error(`stderr: ${data}`);
+    });
+
+    python.on('close', (code) => {
+        if (code !== 0) {
+            return res.status(500).send("An error occurred in the Python script.");
+        }
+        const response = JSON.parse(result); // parse JSON string to object
+        res.json(response);
+    });
 });
 
 // Start server

@@ -6,7 +6,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 def predict_health_risk(userData):
     # Load your trained model
-    model = pickle.load(open("diabetes.pkl", 'rb'))
+    model = pickle.load(open("./MLModels/diabetes.pkl", 'rb'))
 
     # Convert userData from JSON to pandas DataFrame
     userData = pd.DataFrame([userData])
