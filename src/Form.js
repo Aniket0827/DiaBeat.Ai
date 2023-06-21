@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Form.css';
+import { useNavigate } from 'react-router-dom';
 
 function Form() {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         Pregnancies: '',
         Glucose: '',
@@ -33,10 +35,11 @@ function Form() {
         axios.post('http://localhost:5000/predict', formData)
             .then(response => {
                 formData['Diabetes'] = response.data.result;
-                alert(`Prediction is ${response.data.result}`);  // Add this line to show an alert with prediction.
+                alert(`Prediction is ${response.data.result}`);
                 axios.post('http://localhost:5000/register', formData)
                     .then(response => {
                         alert('Form submitted successfully!');
+                        navigate('/profile', { state: { user: formData } });
                         setFormData({
                             Pregnancies: '',
                             Glucose: '',

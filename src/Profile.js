@@ -1,59 +1,45 @@
 import React from 'react';
-import Chart from "chart.js/auto";
-import { Bar } from 'react-chartjs-2';
-import { CategoryScale , LinearScale } from 'chart.js';
-Chart.register(
-    CategoryScale,LinearScale
-);
+import { useLocation } from 'react-router-dom';
+import './Profile.css';
 
 function Profile() {
-  const data = {
-    labels: ['Diabetes', 'Heart Disease', 'High Blood Pressure', 'Arthritis', 'Depression'],
-    datasets: [
-      {
-        label: 'Health Risks',
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
+  const location = useLocation();
+  const user = location.state?.user; // Use optional chaining
 
-  const options = {
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
+  const getRecommendations = (user) => {
+    let recommendations = '';
+    // Ensure user object is not null or undefined before accessing its properties
+    if (user) {
+      if (user.BMI < 18.5) {
+        recommendations += 'Your BMI is less than 18.5, you are underweight. ';
+      } else if (user.BMI >= 18.5 && user.BMI <= 24.9) {
+        recommendations += 'Your BMI is normal. ';
+      } else if (user.BMI >= 25 && user.BMI <= 29.9) {
+        recommendations += 'Your BMI is overweight. ';
+      } else {
+        recommendations += 'Your BMI indicates obesity. ';
+      }
+
+      if (user.Diabetes === 0) {
+        recommendations += 'You are not likely to have diabetes.';
+      } else {
+        recommendations += 'You are likely to have diabetes.';
+      }
+    }
+
+    return recommendations;
   };
 
   return (
-    <div>
-      <h2>Health Risk Predictor</h2>
-      <div>
-        {/* Actual component for displaying health risks would go here */}
+    <div className="profile-page">
+      <div className="profile-container">
+        <h2>Your Profile</h2>
+        {user ? Object.keys(user).map((key, i) => (
+          <p key={i}>{key}: {user[key]}</p>
+        )) : <p>No data available</p>}
+        <h2>Health Recommendations</h2>
+        <p>{getRecommendations(user)}</p>
       </div>
-      <h2>Recommended Actions</h2>
-      <div>
-        {/* Actual component for displaying recommendations would go here */}
-      </div>
-      <h2>Historical Predictions</h2>
-      <Bar data={data} options={options} />
     </div>
   );
 }

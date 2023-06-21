@@ -34,6 +34,17 @@ app.get('/health', (req, res) => {
     res.send('Server is healthy');
 });
 
+app.get('/users/:_id', (req, res) => {
+    User.findById(req.params._id)
+        .then(user => {
+            res.json(user);
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'An error occurred' });
+        });
+});
+
 app.post('/predict', (req, res) => {
     console.log('Received a prediction request with data:', req.body);
 
