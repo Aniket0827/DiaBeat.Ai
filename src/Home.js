@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { TrackChangesOutlined, TrendingUpOutlined, ChatOutlined } from '@mui/icons-material';
+
 import './Home.css';
 
 function Home() {
   return (
     <div className="home">
       <header className="home-header">
-        <h1>"Harnessing AI for Healthier Futures.<br/>A Personalized Path to Diabetes Management."</h1>
+        <h1>Harnessing AI for Healthier Futures. A Personalized Path to Diabetes Management.</h1>
       </header>
 
       <section className="benefits-section">

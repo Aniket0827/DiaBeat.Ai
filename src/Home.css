@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
 body {
     background-color: #171718;
-    font-family: 'poppins';
+    font-family: 'Poppins', sans-serif;
     color: #CDD7E4;
 }
 
@@ -17,13 +17,12 @@ body {
 .home-header {
     text-align: center;
     margin-bottom: 2rem;
-    animation: pulse 2s infinite;
 }
 
 .home-header h1 {
-    font-size: 2 rem;
+    font-size: 1.5rem;
     color: #F2F4F8;
-    text-shadow: 2px 2px #c071ff;
+    animation: blinkingText 5.5s linear infinite;
 }
 
 .benefits-section {
@@ -58,12 +57,12 @@ body {
 }
 
 .card-icon {
-    font-size: 5rem; /* Updated icon size */
+    font-size: 70px;
     color: #c071ff;
 }
 
 .action {
-    color: #6A7480;
+    color: #806a7f;
     font-weight: bold;
 }
 
@@ -84,7 +83,7 @@ body {
     align-items: center;
     padding: 20px;
     box-sizing: border-box;
-    background-color: #2E3E56;
+    background-color: #ffffff;
     color: #F2F4F8;
 }
 
@@ -94,14 +93,8 @@ body {
     margin-right: 20px;
 }
 
-@keyframes pulse {
-    0% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.5;
-    }
-    100% {
-        opacity: 1;
-    }
+@keyframes blinkingText {
+    0% { color: #ffffff; }
+    50% { color:#171718 ; }
+    100% { color: #171718; }
 }
