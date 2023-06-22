@@ -1,5 +1,5 @@
 .form-page {
-    background-color: lightpink;
+    background-color: rgb(30, 30, 30);
     height: 100vh;
     display: flex;
     align-items: center;
@@ -7,7 +7,7 @@
 }
 
 .form-container {
-    width: 60%;
+    width: 40%;
     background-color: white;
     padding: 40px;
     border-radius: 15px;
@@ -20,7 +20,7 @@
 }
 
 .health-form h2 {
-    color: #f19bb6;
+    color: #1e1e1e;
     text-align: center;
     margin-bottom: 20px;
 }
@@ -31,8 +31,9 @@
     border-bottom: 2px solid #ccc;
     padding: 10px;
     margin: 10px 0;
-    font-size: 1.2em;
+    font-size: 1rem;
     width: 100%;
+    font-family: poppins;
 }
 
 .health-form input[type='text']:focus,
@@ -45,10 +46,11 @@
     border: none;
     padding: 10px;
     font-size: 1.2em;
-    background-color: #667eea;
+    background-color: #000000;
     color: white;
     cursor: pointer;
     margin-top: 20px;
+    border-radius: 12px;
 }
 
 .health-form .submit-btn:hover {

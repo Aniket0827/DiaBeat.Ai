@@ -32,11 +32,11 @@ function Form() {
             }
         }
 
-        axios.post('http://localhost:5000/predict', formData)
+        axios.post('http://localhost:5001/predict', formData)
             .then(response => {
                 formData['Diabetes'] = response.data.result;
                 alert(`Prediction is ${response.data.result}`);
-                axios.post('http://localhost:5000/register', formData)
+                axios.post('http://localhost:5001/register', formData)
                     .then(response => {
                         alert('Form submitted successfully!');
                         navigate('/profile', { state: { user: formData } });
@@ -64,7 +64,7 @@ function Form() {
         <div className="form-page">
             <div className="form-container">
                 <form className="health-form" onSubmit={handleSubmit}>
-                    <h2>Health Data Form</h2>
+                    <h2>Your Data</h2>
                     {Object.keys(formData).map((key, i) => (
                         <input
                             key={i}

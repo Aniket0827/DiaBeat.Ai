@@ -1,6 +1,9 @@
-\body {
-    background-color: #f9c1d7;
-    font-family: 'Poppins', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+body {
+    background-color: #171718;
+    font-family: 'poppins';
+    color: #CDD7E4;
 }
 
 .home {
@@ -9,91 +12,70 @@
     justify-content: center;
     align-items: center;
     padding: 2rem;
-    color: #212121;
 }
 
 .home-header {
     text-align: center;
     margin-bottom: 2rem;
+    animation: pulse 2s infinite;
 }
 
 .home-header h1 {
-    font-size: 3rem;
-    color: #212121;
-    text-shadow: 2px 2px #9c9c9c;
+    font-size: 2 rem;
+    color: #F2F4F8;
+    text-shadow: 2px 2px #c071ff;
 }
 
-.home-header p {
-    font-size: 1.25rem;
-    color: #424242;
-}
-
-.benefits-section, .actions-section, .recommendations-section {
+.benefits-section {
     margin-bottom: 2rem;
     width: 100%;
 }
 
-.benefits-cards, .actions-cards, .recommendations-cards {
+.benefits-cards {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
 }
 
 .card {
-    perspective: 1000px;
-    width: 30%;
-    min-width: 200px;
-    height: 200px;
-    border-radius: 10px;
-    margin: 20px;
-    box-shadow: 0 10px 10px rgba(0,0,0,0.2);
+    background-color: white;
+    color: black;
+    width: 300px;
+    min-height: 300px;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 15px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+    text-decoration: none;
 }
 
-.front, .back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    border-radius: 10px;
+.card-content {
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
-    transition: transform 0.8s cubic-bezier(0.75, 0, 0.5, 1);
-}
-
-.front {
-    background: #f06292;
-}
-
-.back {
-    transform: rotateY(180deg);
-    background: #f06292;
-    color: white;
-}
-
-.card:hover .front {
-    transform: rotateY(-180deg);
-}
-
-.card:hover .back {
-    transform: rotateY(0);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .card-icon {
-    font-size: 4rem;
-    color: white;
+    font-size: 5rem; /* Updated icon size */
+    color: #c071ff;
 }
 
-.action-card {
-    background-color: #f06292;
-    color: white;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
+.action {
+    color: #6A7480;
+    font-weight: bold;
 }
 
-.action-card:hover {
-    background-color: #ba2d65;
+.recommendations-section {
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.recommendations-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .recommendations-cards .card {
@@ -102,12 +84,24 @@
     align-items: center;
     padding: 20px;
     box-sizing: border-box;
-    background-color: white;
-    color: #212121;
+    background-color: #2E3E56;
+    color: #F2F4F8;
 }
 
 .recommendations-cards .card img {
     width: 100px;
     object-fit: contain;
     margin-right: 20px;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
 }

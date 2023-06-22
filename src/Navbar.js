@@ -5,7 +5,7 @@ import './Navbar.css';
 function Navbar() {
     return (
         <nav className="navbar">
-            <h2 className="logo">HealthApp</h2>
+            <h1 className="logo">DiaBeat.Ai</h1>
             <div className="nav-links">
                 <Link to="/">Home</Link>
                 <Link to="/Profile">Profile</Link>
